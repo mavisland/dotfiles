@@ -49,14 +49,39 @@ function Install-PlatformPackages {
 		winget install --id BurntSushi.ripgrep --exact --accept-source-agreements --accept-package-agreements
 		winget install --id sharkdp.fd --exact --accept-source-agreements --accept-package-agreements
 		winget install --id zyedidia.micro --exact --accept-source-agreements --accept-package-agreements
+		winget install --id PHP.PHP.8.4 --exact --accept-source-agreements --accept-package-agreements
+		winget install --id SQLite.SQLite --exact --accept-source-agreements --accept-package-agreements
+		winget install --id PostgreSQL.PostgreSQL.17 --exact --accept-source-agreements --accept-package-agreements
+		winget install --id Oracle.MySQLShell --exact --accept-source-agreements --accept-package-agreements
+		winget install --id DBeaver.DBeaver.Community --exact --accept-source-agreements --accept-package-agreements
+		winget install --id MySQL.MySQLWorkbench --exact --accept-source-agreements --accept-package-agreements
+		Install-Composer
 		return
 	}
 
 	if (Get-Command choco -ErrorAction SilentlyContinue) {
 		Write-Host '[dotfiles] Installing Windows packages with Chocolatey'
-		choco install git curl gh vscode 7zip ripgrep fd micro -y
+		choco install git curl gh vscode 7zip ripgrep fd micro php sqlite postgresql mysql-shell dbeaver -y
+		Install-Composer
 		return
 	}
 
 	Write-Host '[dotfiles] Neither winget nor Chocolatey is available. Skipping package installation.'
+}
+
+function Install-Composer {
+	if (Get-Command composer -ErrorAction SilentlyContinue) {
+		Write-Host '[dotfiles] Composer is already available.'
+		return
+	}
+
+	if (-not (Get-Command php -ErrorAction SilentlyContinue)) {
+		Write-Host '[dotfiles] PHP is required before installing Composer.'
+		return
+	}
+
+	Write-Host '[dotfiles] Installing Composer via the official installer'
+	$installerPath = Join-Path $env:TEMP 'composer-setup.exe'
+	Invoke-WebRequest -Uri 'https://getcomposer.org/Composer-Setup.exe' -OutFile $installerPath
+	Start-Process -FilePath $installerPath -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART' -Wait
 }
