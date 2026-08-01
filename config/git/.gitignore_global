@@ -1,16 +1,83 @@
+# Compiled source code / binaries
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Operating System temporary files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
-*.swp
-*.swo
-*.bak
-*.tmp
+
+# Workspace / Development Environments
 .idea/
 .vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Logs and runtime traces
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Composer specific files
 vendor/
-node_modules/
+.composer/
+.config/composer/auth.json
+*.phar
+
+# Laravel specific files
+.env
+.env.local
+.env.testing
+.env.backup
+.env.production
+*.log
+
+# Laravel runtime and cache files
+/storage/*.key
+/storage/framework/cache/data/*
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/framework/views/*
+/storage/logs/*.log
+
+# Frontend dependencies and build artifacts
+/node_modules/
+/public/build/
+/public/hot/
+/public/storage
+.mix-manifest.json
+mix-manifest.json
+package-lock.json
+yarn.lock
+
+# PHPUnit test result files and code coverage reports
+.phpunit.result.cache
+.phpunit.cache/
+homestead.json
+homestead.yaml
+.vagrant/
+
+# SSH keys and PEM files
 id_rsa
 id_rsa.pub
 id_ed25519
 id_ed25519.pub
 *.pem
-.config/composer/auth.json
+
+# Other files to ignore
+*.swp
+*.swo
+*.bak
+*.tmp
