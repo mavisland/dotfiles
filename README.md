@@ -19,6 +19,9 @@ Cross-platform dotfiles and bootstrap scripts for Windows, macOS, Ubuntu, and Fe
 - Shell defaults start in `config/shell/.bashrc`.
 - Local-only shell overrides can live in `~/.shell_local` and are loaded by bash and zsh.
 - SSH host aliases live in `config/ssh/.ssh/config` and are installed to `~/.ssh/config`.
+- Global Composer config lives in `config/composer/.config/composer/composer.json` and is installed into `~/.config/composer/composer.json`.
+- PHP override settings live in `config/php/.config/php/conf.d/99-dotfiles.ini` and are loaded through `PHP_INI_SCAN_DIR`.
+- Composer global packages are installed from the tracked Composer home after the config is copied.
 - `micro` is exported as the default editor through shared shell and PowerShell profiles.
 - Shared shell and PowerShell prompts now show the current directory and Git branch.
 - Windows Terminal gets a tracked profile defaults file when its settings path is available.

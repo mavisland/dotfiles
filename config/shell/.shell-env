@@ -4,6 +4,13 @@ export VISUAL="micro"
 export GIT_EDITOR="micro"
 export PAGER="less"
 export LESS="-FRX"
+export COMPOSER_HOME="$HOME/.config/composer"
+
+if [ -n "${PHP_INI_SCAN_DIR:-}" ]; then
+	export PHP_INI_SCAN_DIR="$HOME/.config/php/conf.d:${PHP_INI_SCAN_DIR}"
+else
+	export PHP_INI_SCAN_DIR="$HOME/.config/php/conf.d"
+fi
 
 path_prepend() {
 	case ":$PATH:" in

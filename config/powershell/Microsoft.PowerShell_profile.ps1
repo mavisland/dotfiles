@@ -1,6 +1,15 @@
 $env:EDITOR = 'micro'
 $env:VISUAL = 'micro'
 $env:GIT_EDITOR = 'micro'
+$env:COMPOSER_HOME = Join-Path $HOME '.config\composer'
+
+$phpIniScanDir = Join-Path $HOME '.config\php\conf.d'
+if ($env:PHP_INI_SCAN_DIR) {
+	$env:PHP_INI_SCAN_DIR = "$phpIniScanDir;$env:PHP_INI_SCAN_DIR"
+}
+else {
+	$env:PHP_INI_SCAN_DIR = $phpIniScanDir
+}
 
 function global:prompt {
 	$locationPart = (Get-Location).Path

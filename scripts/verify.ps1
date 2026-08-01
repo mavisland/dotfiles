@@ -20,5 +20,18 @@ if ($errors) {
 Write-Host '[dotfiles] Validating JSON config'
 python -m json.tool (Join-Path $repoRoot 'config/vscode/settings.json') > $null
 python -m json.tool (Join-Path $repoRoot 'config/terminal/windows-terminal/settings.json') > $null
+python -m json.tool (Join-Path $repoRoot 'config/composer/.config/composer/composer.json') > $null
+
+if (Get-Command composer -ErrorAction SilentlyContinue) {
+    Write-Host '[dotfiles] Validating Composer config'
+    $env:COMPOSER_HOME = Join-Path $repoRoot 'config/composer/.config/composer'
+    composer validate --no-check-publish --no-interaction
+}
+
+if (Get-Command php -ErrorAction SilentlyContinue) {
+    Write-Host '[dotfiles] Validating PHP override config'
+    $env:PHP_INI_SCAN_DIR = Join-Path $repoRoot 'config/php/.config/php/conf.d'
+    php --ri date > $null
+}
 
 Write-Host '[dotfiles] Verification complete'

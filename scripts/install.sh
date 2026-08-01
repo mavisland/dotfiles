@@ -46,12 +46,37 @@ install_symlink() {
 
 install_stow_package() {
   local package_name="$1"
+  local source_path=""
+  local target_path=""
+
+  case "${package_name}" in
+    ssh)
+      source_path="${repo_root}/config/ssh/.ssh/config"
+      target_path="${HOME}/.ssh/config"
+      ;;
+    composer)
+      source_path="${repo_root}/config/composer/.config/composer/composer.json"
+      target_path="${HOME}/.config/composer/composer.json"
+      ;;
+    php)
+      source_path="${repo_root}/config/php/.config/php/conf.d/99-dotfiles.ini"
+      target_path="${HOME}/.config/php/conf.d/99-dotfiles.ini"
+      ;;
+    *)
+      return 1
+      ;;
+  esac
 
   if command -v stow >/dev/null 2>&1; then
-    if [[ -e "${HOME}/.ssh/config" && ! -L "${HOME}/.ssh/config" ]]; then
-      local backup_path="${HOME}/.ssh/config.bak.$(date +%Y%m%d%H%M%S)"
-      log "Backing up ${HOME}/.ssh/config to ${backup_path}"
-      mv "${HOME}/.ssh/config" "${backup_path}"
+    if [[ -L "${target_path}" && "$(readlink "${target_path}")" == "${source_path}" ]]; then
+      log "Skipping ${target_path}; already linked to ${source_path}"
+      return
+    fi
+
+    if [[ -e "${target_path}" || -L "${target_path}" ]]; then
+      local backup_path="${target_path}.bak.$(date +%Y%m%d%H%M%S)"
+      log "Backing up ${target_path} to ${backup_path}"
+      mv "${target_path}" "${backup_path}"
     fi
 
     log "Stowing ${package_name}"
@@ -60,8 +85,21 @@ install_stow_package() {
   fi
 
   log "stow is not available; linking ${package_name} manually"
-  mkdir -p "${HOME}/.ssh"
-  install_symlink "${repo_root}/config/${package_name}/.ssh/config" "${HOME}/.ssh/config"
+  mkdir -p "$(dirname "${target_path}")"
+  install_symlink "${source_path}" "${target_path}"
+}
+
+install_composer_packages() {
+  local composer_home="${HOME}/.config/composer"
+
+  if ! command -v composer >/dev/null 2>&1; then
+    log "composer is not available; skipping global package install"
+    return
+  fi
+
+  mkdir -p "${composer_home}"
+  log "Installing global Composer packages"
+  (cd "${composer_home}" && composer install --no-interaction --prefer-dist --no-progress)
 }
 
 install_vscode_settings() {
@@ -99,6 +137,9 @@ install_symlink "${repo_root}/config/shell/.zshrc" "${HOME}/.zshrc"
 install_symlink "${repo_root}/config/shell/.profile" "${HOME}/.profile"
 install_symlink "${repo_root}/config/shell/.bash_profile" "${HOME}/.bash_profile"
 install_stow_package "ssh"
+install_stow_package "composer"
+install_stow_package "php"
+install_composer_packages
 install_vscode_settings
 
 install_macos_terminal_settings() {
