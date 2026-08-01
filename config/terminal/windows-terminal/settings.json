@@ -1,0 +1,15 @@
+{
+  "$schema": "https://aka.ms/terminal-profiles-schema",
+  "profiles": {
+    "defaults": {
+      "fontFace": "Cascadia Mono",
+      "fontSize": 11,
+      "startingDirectory": "C:\\Users\\%USERNAME%",
+      "useAcrylic": true,
+      "acrylicOpacity": 0.92
+    }
+  },
+  "actions": [],
+  "copyOnSelect": true,
+  "launchMode": "focus"
+}

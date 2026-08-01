@@ -31,9 +31,69 @@ function Install-File {
     Copy-Item -Force $Source $Target
 }
 
+function Install-PowerShellProfile {
+    $profilePath = Join-Path $HOME 'Documents\PowerShell\Microsoft.PowerShell_profile.ps1'
+    $profileSource = Join-Path $repoRoot 'config/powershell/Microsoft.PowerShell_profile.ps1'
+
+    $profileParent = Split-Path -Parent $profilePath
+    if (-not (Test-Path $profileParent)) {
+        New-Item -ItemType Directory -Force -Path $profileParent | Out-Null
+    }
+
+    if (Test-Path $profilePath) {
+        $backup = "$profilePath.bak.$(Get-Date -Format 'yyyyMMddHHmmss')"
+        Write-Log "Backing up $profilePath to $backup"
+        Move-Item -Force $profilePath $backup
+    }
+
+    Write-Log "Copying $profileSource -> $profilePath"
+    Copy-Item -Force $profileSource $profilePath
+}
+
+function Get-WindowsTerminalSettingsPath {
+    $candidatePaths = @(
+        (Join-Path $env:LOCALAPPDATA 'Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json'),
+        (Join-Path $env:LOCALAPPDATA 'Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json'),
+        (Join-Path $env:LOCALAPPDATA 'Microsoft\Windows Terminal\settings.json')
+    )
+
+    foreach ($candidatePath in $candidatePaths) {
+        if (Test-Path $candidatePath) {
+            return $candidatePath
+        }
+    }
+
+    return $null
+}
+
+function Install-WindowsTerminalSettings {
+    $targetPath = Get-WindowsTerminalSettingsPath
+    if (-not $targetPath) {
+        Write-Log 'Windows Terminal settings file was not found; skipping terminal profile install.'
+        return
+    }
+
+    $terminalSource = Join-Path $repoRoot 'config/terminal/windows-terminal/settings.json'
+    $terminalParent = Split-Path -Parent $targetPath
+    if (-not (Test-Path $terminalParent)) {
+        New-Item -ItemType Directory -Force -Path $terminalParent | Out-Null
+    }
+
+    if (Test-Path $targetPath) {
+        $backup = "$targetPath.bak.$(Get-Date -Format 'yyyyMMddHHmmss')"
+        Write-Log "Backing up $targetPath to $backup"
+        Move-Item -Force $targetPath $backup
+    }
+
+    Write-Log "Copying $terminalSource -> $targetPath"
+    Copy-Item -Force $terminalSource $targetPath
+}
+
 Write-Log 'Installing core dotfiles'
 Install-File -Source (Join-Path $repoRoot 'config/git/.gitconfig') -Target (Join-Path $HOME '.gitconfig')
 Install-File -Source (Join-Path $repoRoot 'config/editor/.editorconfig') -Target (Join-Path $HOME '.editorconfig')
 Install-File -Source (Join-Path $repoRoot 'config/shell/.bashrc') -Target (Join-Path $HOME '.bashrc')
+Install-PowerShellProfile
+Install-WindowsTerminalSettings
 
 Write-Log 'Core install complete'

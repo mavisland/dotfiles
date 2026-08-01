@@ -6,7 +6,7 @@
 	defaultBranch = main
 
 [core]
-	editor = code --wait
+	editor = micro
 
 [pull]
 	rebase = false

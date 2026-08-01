@@ -15,6 +15,11 @@ Cross-platform dotfiles and bootstrap scripts for Windows, macOS, Ubuntu, and Fe
 - Git defaults are tracked in `config/git/.gitconfig`.
 - Editor defaults are tracked in `config/editor/.editorconfig` and `config/vscode/settings.json`.
 - Shell defaults start in `config/shell/.bashrc`.
+- `micro` is exported as the default editor through shared shell and PowerShell profiles.
+- Shared shell and PowerShell prompts now show the current directory and Git branch.
+- Windows Terminal gets a tracked profile defaults file when its settings path is available.
+- macOS gets tracked Terminal and iTerm2 preference templates, plus zsh completion helpers.
+- macOS shell integration now loads Homebrew completions and zsh plugins when available.
 - Bootstrap entry points now install the core Git, editor, and shell files into the home directory.
 - macOS, Ubuntu, and Fedora now have a first-pass package installation layer.
 - Windows now tries to install `winget` if it is missing, then falls back to Chocolatey for core package installation.

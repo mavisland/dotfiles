@@ -13,5 +13,5 @@ install_platform_packages() {
 	brew update
 
 	log "Installing macOS packages"
-	brew install git gh ripgrep fd micro
+	brew install git gh ripgrep fd micro zsh-autosuggestions zsh-syntax-highlighting
 }

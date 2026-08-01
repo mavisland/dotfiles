@@ -1,0 +1,6 @@
+# Shared interactive shell environment
+export EDITOR="micro"
+export VISUAL="micro"
+export GIT_EDITOR="micro"
+export PAGER="less"
+export LESS="-FRX"

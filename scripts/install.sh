@@ -40,8 +40,33 @@ install_symlink() {
 }
 
 log "Installing core dotfiles"
+install_symlink "${repo_root}/config/shell/.shell-env" "${HOME}/.shell-env"
 install_symlink "${repo_root}/config/git/.gitconfig" "${HOME}/.gitconfig"
 install_symlink "${repo_root}/config/editor/.editorconfig" "${HOME}/.editorconfig"
 install_symlink "${repo_root}/config/shell/.bashrc" "${HOME}/.bashrc"
+install_symlink "${repo_root}/config/shell/.bash_completion" "${HOME}/.bash_completion"
+install_symlink "${repo_root}/config/shell/.zshrc" "${HOME}/.zshrc"
+install_symlink "${repo_root}/config/shell/.profile" "${HOME}/.profile"
+install_symlink "${repo_root}/config/shell/.bash_profile" "${HOME}/.bash_profile"
+
+install_macos_terminal_settings() {
+  local prefs_dir="${HOME}/Library/Preferences"
+  local terminal_source="${repo_root}/config/terminal/macos-terminal/com.apple.Terminal.plist"
+  local iterm_source="${repo_root}/config/terminal/iterm2/com.googlecode.iterm2.plist"
+
+  mkdir -p "${prefs_dir}"
+
+  if [[ -f "${terminal_source}" ]]; then
+    install_symlink "${terminal_source}" "${prefs_dir}/com.apple.Terminal.plist"
+  fi
+
+  if [[ -f "${iterm_source}" ]]; then
+    install_symlink "${iterm_source}" "${prefs_dir}/com.googlecode.iterm2.plist"
+  fi
+}
+
+if [[ "${os_name}" == "macos" ]]; then
+  install_macos_terminal_settings
+fi
 
 log "Core install complete"
