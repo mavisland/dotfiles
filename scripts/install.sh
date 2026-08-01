@@ -5,6 +5,26 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 repo_root="$(cd "${script_dir}/.." && pwd)"
 source "${script_dir}/lib/common.sh"
 
+os_name="$(detect_os)"
+
+case "${os_name}" in
+  macos)
+    source "${script_dir}/platform/macos.sh"
+    install_platform_packages
+    ;;
+  ubuntu)
+    source "${script_dir}/platform/ubuntu.sh"
+    install_platform_packages
+    ;;
+  fedora)
+    source "${script_dir}/platform/fedora.sh"
+    install_platform_packages
+    ;;
+  *)
+    log "Skipping platform package install for unsupported OS: ${os_name}"
+    ;;
+esac
+
 install_symlink() {
   local source_path="$1"
   local target_path="$2"

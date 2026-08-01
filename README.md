@@ -16,6 +16,10 @@ Cross-platform dotfiles and bootstrap scripts for Windows, macOS, Ubuntu, and Fe
 - Editor defaults are tracked in `config/editor/.editorconfig` and `config/vscode/settings.json`.
 - Shell defaults start in `config/shell/.bashrc`.
 - Bootstrap entry points now install the core Git, editor, and shell files into the home directory.
+- macOS, Ubuntu, and Fedora now have a first-pass package installation layer.
+- Windows now tries to install `winget` if it is missing, then falls back to Chocolatey for core package installation.
+- Windows also installs common CLI tools such as `curl`, `ripgrep`, and `fd`.
+- `micro` is installed on every supported platform for command-line editing.
 
 ## Run
 
