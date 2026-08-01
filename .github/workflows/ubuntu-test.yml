@@ -1,0 +1,28 @@
+name: Ubuntu Dotfiles Test
+
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+    branches: ["main", "master"]
+  workflow_dispatch:
+
+jobs:
+  test-ubuntu:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Make Scripts Executable
+        run: |
+          chmod +x ./install.sh
+          chmod +x ./scripts/platform/*.sh
+          chmod +x ./scripts/*.sh
+
+      - name: Run Install Script
+        run: ./install.sh
+
+      - name: Verify Installation
+        run: ./scripts/verify.sh
