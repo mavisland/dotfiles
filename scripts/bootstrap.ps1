@@ -8,6 +8,4 @@ function Write-Log {
     Write-Host "[dotfiles] $Message"
 }
 
-Write-Log 'Windows bootstrap placeholder is ready.'
-Write-Log "Repository root: $repoRoot"
-Write-Log 'Next step will add package install, symlink, and app settings support.'
+& (Join-Path $scriptDir 'install.ps1') @args

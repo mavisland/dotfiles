@@ -15,7 +15,7 @@ Cross-platform dotfiles and bootstrap scripts for Windows, macOS, Ubuntu, and Fe
 - Git defaults are tracked in `config/git/.gitconfig`.
 - Editor defaults are tracked in `config/editor/.editorconfig` and `config/vscode/settings.json`.
 - Shell defaults start in `config/shell/.bashrc`.
-- Bootstrap entry points currently detect the platform and print the next step.
+- Bootstrap entry points now install the core Git, editor, and shell files into the home directory.
 
 ## Run
 

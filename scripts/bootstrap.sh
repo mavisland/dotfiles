@@ -11,13 +11,13 @@ log "Detected OS: ${os_name}"
 
 case "${os_name}" in
   macos)
-    "${script_dir}/platform/macos.sh"
+    bash "${script_dir}/install.sh"
     ;;
   ubuntu)
-    "${script_dir}/platform/ubuntu.sh"
+    bash "${script_dir}/install.sh"
     ;;
   fedora)
-    "${script_dir}/platform/fedora.sh"
+    bash "${script_dir}/install.sh"
     ;;
   windows)
     log "Use install.ps1 on Windows for the PowerShell bootstrap path."
