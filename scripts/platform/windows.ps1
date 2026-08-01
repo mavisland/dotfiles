@@ -129,6 +129,7 @@ function Install-VSCodeExtensions {
 	Get-Content $extensionsFile | ForEach-Object {
 		$extension = $_.Trim()
 		if (-not [string]::IsNullOrWhiteSpace($extension)) {
+			Write-Host "[dotfiles] Installing VS Code extension: $extension"
 			code --install-extension $extension --force
 		}
 	}

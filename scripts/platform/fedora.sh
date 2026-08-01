@@ -79,6 +79,7 @@ install_vscode_extensions() {
 	log "Installing VS Code extensions"
 	while IFS= read -r extension || [[ -n "${extension}" ]]; do
 		if [[ -n "${extension}" ]]; then
+			log "Installing VS Code extension: ${extension}"
 			code --install-extension "${extension}" --force
 		fi
 	done < "${extensions_file}"
