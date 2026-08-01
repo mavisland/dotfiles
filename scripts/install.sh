@@ -81,6 +81,13 @@ install_stow_package() {
 
     log "Stowing ${package_name}"
     (cd "${repo_root}/config" && stow -t "${HOME}" "${package_name}")
+
+    if [[ "${package_name}" == "ssh" ]]; then
+      log "Setting correct permissions for SSH..."
+      chmod 700 "$HOME/.ssh"
+      chmod 600 "$HOME/.ssh/config"
+    fi
+
     return
   fi
 
