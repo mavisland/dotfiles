@@ -26,4 +26,18 @@ install_platform_packages() {
 		sqlite \
 		zsh-autosuggestions \
 		zsh-syntax-highlighting
+
+	install_nerd_font
+}
+
+install_nerd_font() {
+	local font_url="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/FiraCode.zip"
+	local fonts_dir="${HOME}/Library/Fonts"
+	local temp_dir
+	temp_dir="$(mktemp -d)"
+
+	mkdir -p "${fonts_dir}"
+	curl -L --fail --silent --show-error "${font_url}" -o "${temp_dir}/FiraCode.zip"
+	unzip -o "${temp_dir}/FiraCode.zip" -d "${fonts_dir}"
+	rm -rf "${temp_dir}"
 }

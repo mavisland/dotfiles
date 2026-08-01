@@ -22,6 +22,7 @@ Cross-platform dotfiles and bootstrap scripts for Windows, macOS, Ubuntu, and Fe
 - Global Composer config lives in `config/composer/.config/composer/composer.json` and is installed into `~/.config/composer/composer.json`.
 - PHP override settings live in `config/php/.config/php/conf.d/99-dotfiles.ini` and are loaded through `PHP_INI_SCAN_DIR`.
 - Composer global packages are installed from the tracked Composer home after the config is copied.
+- FiraCode Nerd Font is installed on every platform so terminal glyphs render correctly.
 - `micro` is exported as the default editor through shared shell and PowerShell profiles.
 - Shared shell and PowerShell prompts now show the current directory and Git branch.
 - Windows Terminal gets a tracked profile defaults file when its settings path is available.

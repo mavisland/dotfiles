@@ -34,4 +34,16 @@ if command -v php >/dev/null 2>&1; then
   PHP_INI_SCAN_DIR="${repo_root}/config/php/.config/php/conf.d" php --ri date >/dev/null
 fi
 
+if [[ -d "${repo_root}/config/terminal" ]]; then
+  echo "[dotfiles] Checking terminal font configs"
+  if [[ ! -f "${repo_root}/config/terminal/iterm2/com.googlecode.iterm2.plist" ]]; then
+    echo "[dotfiles] Missing iTerm2 plist"
+    exit 1
+  fi
+  if [[ ! -f "${repo_root}/config/terminal/windows-terminal/settings.json" ]]; then
+    echo "[dotfiles] Missing Windows Terminal settings"
+    exit 1
+  fi
+fi
+
 echo "[dotfiles] Verification complete"

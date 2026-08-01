@@ -26,6 +26,7 @@ install_platform_packages() {
 	"${sudo_cmd[@]}" dnf install -y \
 		git \
 		curl \
+		unzip \
 		@development-tools \
 		stow \
 		ripgrep \
@@ -38,4 +39,21 @@ install_platform_packages() {
 		composer \
 		mariadb \
 		sqlite
+
+	install_nerd_font
+}
+
+install_nerd_font() {
+	local font_url="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/FiraCode.zip"
+	local fonts_dir="${HOME}/.local/share/fonts/FiraCodeNerdFont"
+	local temp_dir
+	temp_dir="$(mktemp -d)"
+
+	mkdir -p "${fonts_dir}"
+	curl -L --fail --silent --show-error "${font_url}" -o "${temp_dir}/FiraCode.zip"
+	unzip -o "${temp_dir}/FiraCode.zip" -d "${fonts_dir}"
+	if command -v fc-cache >/dev/null 2>&1; then
+		fc-cache -f -v >/dev/null
+	fi
+	rm -rf "${temp_dir}"
 }

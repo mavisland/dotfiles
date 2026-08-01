@@ -55,6 +55,7 @@ function Install-PlatformPackages {
 		winget install --id SQLite.SQLite --exact --accept-source-agreements --accept-package-agreements
 		winget install --id DBeaver.DBeaver.Community --exact --accept-source-agreements --accept-package-agreements
 		Install-Composer
+		Install-NerdFont
 		return
 	}
 
@@ -63,6 +64,7 @@ function Install-PlatformPackages {
 		# Keep the Chocolatey fallback aligned with the winget package choices.
 		choco install git curl gh vscode nanazip ripgrep fd micro laragon sqlite dbeaver -y
 		Install-Composer
+		Install-NerdFont
 		return
 	}
 
@@ -84,4 +86,25 @@ function Install-Composer {
 	$installerPath = Join-Path $env:TEMP 'composer-setup.exe'
 	Invoke-WebRequest -Uri 'https://getcomposer.org/Composer-Setup.exe' -OutFile $installerPath
 	Start-Process -FilePath $installerPath -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART' -Wait
+}
+
+function Install-NerdFont {
+	$fontUrl = 'https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/FiraCode.zip'
+	$fontDir = Join-Path $env:LOCALAPPDATA 'Microsoft\Windows\Fonts'
+	$tempDir = Join-Path $env:TEMP ('FiraCodeNerdFont-' + [guid]::NewGuid().ToString())
+
+	if (-not (Test-Path $fontDir)) {
+		New-Item -ItemType Directory -Force -Path $fontDir | Out-Null
+	}
+
+	New-Item -ItemType Directory -Force -Path $tempDir | Out-Null
+	$zipPath = Join-Path $tempDir 'FiraCode.zip'
+	Invoke-WebRequest -Uri $fontUrl -OutFile $zipPath
+	Expand-Archive -Path $zipPath -DestinationPath $tempDir -Force
+
+	Get-ChildItem -Path $tempDir -Filter '*.ttf' -Recurse | ForEach-Object {
+		Copy-Item -Force $_.FullName (Join-Path $fontDir $_.Name)
+	}
+
+	Remove-Item -Recurse -Force $tempDir
 }

@@ -34,4 +34,13 @@ if (Get-Command php -ErrorAction SilentlyContinue) {
     php --ri date > $null
 }
 
+Write-Host '[dotfiles] Checking terminal font configs'
+if (-not (Test-Path (Join-Path $repoRoot 'config/terminal/iterm2/com.googlecode.iterm2.plist'))) {
+    throw 'Missing iTerm2 plist'
+}
+
+if (-not (Test-Path (Join-Path $repoRoot 'config/terminal/windows-terminal/settings.json'))) {
+    throw 'Missing Windows Terminal settings'
+}
+
 Write-Host '[dotfiles] Verification complete'
