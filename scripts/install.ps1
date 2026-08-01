@@ -21,6 +21,11 @@ function Install-File {
         New-Item -ItemType Directory -Force -Path $targetParent | Out-Null
     }
 
+    if ((Test-Path $Target) -and (Get-FileHash $Source).Hash -eq (Get-FileHash $Target).Hash) {
+        Write-Log "Skipping $Target; already matches $Source"
+        return
+    }
+
     if (Test-Path $Target) {
         $backup = "$Target.bak.$(Get-Date -Format 'yyyyMMddHHmmss')"
         Write-Log "Backing up $Target to $backup"
@@ -38,6 +43,11 @@ function Install-PowerShellProfile {
     $profileParent = Split-Path -Parent $profilePath
     if (-not (Test-Path $profileParent)) {
         New-Item -ItemType Directory -Force -Path $profileParent | Out-Null
+    }
+
+    if ((Test-Path $profilePath) -and (Get-FileHash $profileSource).Hash -eq (Get-FileHash $profilePath).Hash) {
+        Write-Log "Skipping $profilePath; already matches $profileSource"
+        return
     }
 
     if (Test-Path $profilePath) {
@@ -79,6 +89,11 @@ function Install-WindowsTerminalSettings {
         New-Item -ItemType Directory -Force -Path $terminalParent | Out-Null
     }
 
+    if ((Test-Path $targetPath) -and (Get-FileHash $terminalSource).Hash -eq (Get-FileHash $targetPath).Hash) {
+        Write-Log "Skipping $targetPath; already matches $terminalSource"
+        return
+    }
+
     if (Test-Path $targetPath) {
         $backup = "$targetPath.bak.$(Get-Date -Format 'yyyyMMddHHmmss')"
         Write-Log "Backing up $targetPath to $backup"
@@ -96,6 +111,11 @@ function Install-VSCodeSettings {
 
     if (-not (Test-Path $settingsParent)) {
         New-Item -ItemType Directory -Force -Path $settingsParent | Out-Null
+    }
+
+    if ((Test-Path $settingsPath) -and (Get-FileHash $settingsSource).Hash -eq (Get-FileHash $settingsPath).Hash) {
+        Write-Log "Skipping $settingsPath; already matches $settingsSource"
+        return
     }
 
     if (Test-Path $settingsPath) {

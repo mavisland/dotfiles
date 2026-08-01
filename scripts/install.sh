@@ -29,6 +29,11 @@ install_symlink() {
   local source_path="$1"
   local target_path="$2"
 
+  if [[ -L "${target_path}" && "$(readlink "${target_path}")" == "${source_path}" ]]; then
+    log "Skipping ${target_path}; already linked to ${source_path}"
+    return
+  fi
+
   if [[ -e "${target_path}" || -L "${target_path}" ]]; then
     local backup_path="${target_path}.bak.$(date +%Y%m%d%H%M%S)"
     log "Backing up ${target_path} to ${backup_path}"
