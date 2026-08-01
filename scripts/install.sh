@@ -44,6 +44,26 @@ install_symlink() {
   ln -s "${source_path}" "${target_path}"
 }
 
+install_stow_package() {
+  local package_name="$1"
+
+  if command -v stow >/dev/null 2>&1; then
+    if [[ -e "${HOME}/.ssh/config" && ! -L "${HOME}/.ssh/config" ]]; then
+      local backup_path="${HOME}/.ssh/config.bak.$(date +%Y%m%d%H%M%S)"
+      log "Backing up ${HOME}/.ssh/config to ${backup_path}"
+      mv "${HOME}/.ssh/config" "${backup_path}"
+    fi
+
+    log "Stowing ${package_name}"
+    (cd "${repo_root}/config" && stow -t "${HOME}" "${package_name}")
+    return
+  fi
+
+  log "stow is not available; linking ${package_name} manually"
+  mkdir -p "${HOME}/.ssh"
+  install_symlink "${repo_root}/config/${package_name}/.ssh/config" "${HOME}/.ssh/config"
+}
+
 install_vscode_settings() {
   local settings_source="${repo_root}/config/vscode/settings.json"
   local target_path=""
@@ -78,6 +98,7 @@ install_symlink "${repo_root}/config/shell/.bash_completion" "${HOME}/.bash_comp
 install_symlink "${repo_root}/config/shell/.zshrc" "${HOME}/.zshrc"
 install_symlink "${repo_root}/config/shell/.profile" "${HOME}/.profile"
 install_symlink "${repo_root}/config/shell/.bash_profile" "${HOME}/.bash_profile"
+install_stow_package "ssh"
 install_vscode_settings
 
 install_macos_terminal_settings() {

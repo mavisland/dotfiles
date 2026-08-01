@@ -36,6 +36,30 @@ function Install-File {
     Copy-Item -Force $Source $Target
 }
 
+function Install-SSHConfig {
+    $sshSource = Join-Path $repoRoot 'config/ssh/.ssh/config'
+    $sshTarget = Join-Path $HOME '.ssh\config'
+    $sshParent = Split-Path -Parent $sshTarget
+
+    if (-not (Test-Path $sshParent)) {
+        New-Item -ItemType Directory -Force -Path $sshParent | Out-Null
+    }
+
+    if ((Test-Path $sshTarget) -and (Get-FileHash $sshSource).Hash -eq (Get-FileHash $sshTarget).Hash) {
+        Write-Log "Skipping $sshTarget; already matches $sshSource"
+        return
+    }
+
+    if (Test-Path $sshTarget) {
+        $backup = "$sshTarget.bak.$(Get-Date -Format 'yyyyMMddHHmmss')"
+        Write-Log "Backing up $sshTarget to $backup"
+        Move-Item -Force $sshTarget $backup
+    }
+
+    Write-Log "Copying $sshSource -> $sshTarget"
+    Copy-Item -Force $sshSource $sshTarget
+}
+
 function Install-PowerShellProfile {
     $profilePath = Join-Path $HOME 'Documents\PowerShell\Microsoft.PowerShell_profile.ps1'
     $profileSource = Join-Path $repoRoot 'config/powershell/Microsoft.PowerShell_profile.ps1'
@@ -132,6 +156,7 @@ Write-Log 'Installing core dotfiles'
 Install-File -Source (Join-Path $repoRoot 'config/git/.gitconfig') -Target (Join-Path $HOME '.gitconfig')
 Install-File -Source (Join-Path $repoRoot 'config/editor/.editorconfig') -Target (Join-Path $HOME '.editorconfig')
 Install-File -Source (Join-Path $repoRoot 'config/shell/.bashrc') -Target (Join-Path $HOME '.bashrc')
+Install-SSHConfig
 Install-PowerShellProfile
 Install-WindowsTerminalSettings
 Install-VSCodeSettings
