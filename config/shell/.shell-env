@@ -40,3 +40,6 @@ alias pa='php artisan'
 alias pc='composer'
 alias pcr='composer require'
 alias pcu='composer update'
+
+# Add to PATH for Composer global bin directory
+export PATH="$HOME/.config/composer/vendor/bin:$PATH"
