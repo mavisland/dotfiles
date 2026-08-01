@@ -37,6 +37,5 @@ install_platform_packages() {
 		php-xml \
 		composer \
 		mariadb \
-		postgresql \
 		sqlite
 }

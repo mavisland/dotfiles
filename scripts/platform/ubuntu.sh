@@ -37,6 +37,5 @@ install_platform_packages() {
 		php-xml \
 		composer \
 		default-mysql-client \
-		postgresql-client \
 		sqlite3
 }

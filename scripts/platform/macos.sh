@@ -23,7 +23,6 @@ install_platform_packages() {
 		php \
 		composer \
 		mysql-client \
-		postgresql@17 \
 		sqlite \
 		zsh-autosuggestions \
 		zsh-syntax-highlighting

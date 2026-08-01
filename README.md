@@ -6,6 +6,8 @@ Cross-platform dotfiles and bootstrap scripts for Windows, macOS, Ubuntu, and Fe
 
 - `install.sh` - bootstrap entry point for macOS and Linux
 - `install.ps1` - bootstrap entry point for Windows
+- `scripts/verify.sh` - verification entry point for macOS and Linux
+- `scripts/verify.ps1` - verification entry point for Windows
 - `scripts/` - shared bootstrap helpers
 - `config/` - tracked application and editor config files
 - `platform/` - operating-system-specific setup steps
@@ -22,7 +24,7 @@ Cross-platform dotfiles and bootstrap scripts for Windows, macOS, Ubuntu, and Fe
 - macOS shell integration now loads Homebrew completions and zsh plugins when available.
 - Linux and macOS package installs now include `stow`, PHP tooling, Composer, and common database clients.
 - VS Code settings are installed into each platform's user profile location.
-- Windows now installs PHP, SQLite, PostgreSQL, MySQL tools, DBeaver, and Composer when winget is available.
+- Windows now installs Laragon, NanaZip, database clients, and Composer when winget is available; Laragon handles PHP, MySQL, Apache, and Nginx.
 - Bootstrap entry points now install the core Git, editor, and shell files into the home directory.
 - macOS, Ubuntu, and Fedora now have a first-pass package installation layer.
 - Windows now tries to install `winget` if it is missing, then falls back to Chocolatey for core package installation.
@@ -34,8 +36,20 @@ Cross-platform dotfiles and bootstrap scripts for Windows, macOS, Ubuntu, and Fe
 - macOS / Linux: `bash install.sh`
 - Windows: `powershell -ExecutionPolicy Bypass -File install.ps1`
 
-## Next steps
+## Verify
 
-1. Add Git, shell, editor, and terminal configs.
-2. Add OS-specific package install scripts.
-3. Add a single bootstrap command per platform.
+- macOS / Linux: `bash scripts/verify.sh`
+- Windows: `powershell -ExecutionPolicy Bypass -File scripts/verify.ps1`
+
+## Sync
+
+1. Run the verification script for your platform.
+2. Test the installer on the current machine.
+3. Fix any config drift or missing package IDs.
+4. Commit and push the changes.
+
+## Maintenance
+
+1. Keep package IDs and platform defaults aligned with the real machines you use.
+2. Re-run verification after any config or installer change.
+3. Update the Windows Laragon or NanaZip choices if your workflow changes.
