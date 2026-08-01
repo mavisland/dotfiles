@@ -1,10 +1,21 @@
 {
   "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.rulers": [80, 120],
   "editor.trimAutoWhitespace": true,
   "files.eol": "\n",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
+  "files.associations": {
+    "*.blade.php": "blade",
+    "*.phpstub": "php"
+  },
+  "php.validate.executablePath": "php",
   "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
   "workbench.startupEditor": "none"
 }

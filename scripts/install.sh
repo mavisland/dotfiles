@@ -39,8 +39,33 @@ install_symlink() {
   ln -s "${source_path}" "${target_path}"
 }
 
+install_vscode_settings() {
+  local settings_source="${repo_root}/config/vscode/settings.json"
+  local target_path=""
+
+  case "${os_name}" in
+    macos)
+      target_path="${HOME}/Library/Application Support/Code/User/settings.json"
+      ;;
+    ubuntu|fedora)
+      if [[ -n "${XDG_CONFIG_HOME:-}" ]]; then
+        target_path="${XDG_CONFIG_HOME}/Code/User/settings.json"
+      else
+        target_path="${HOME}/.config/Code/User/settings.json"
+      fi
+      ;;
+    *)
+      return
+      ;;
+  esac
+
+  mkdir -p "$(dirname "${target_path}")"
+  install_symlink "${settings_source}" "${target_path}"
+}
+
 log "Installing core dotfiles"
 install_symlink "${repo_root}/config/shell/.shell-env" "${HOME}/.shell-env"
+install_symlink "${repo_root}/config/git/.gitignore_global" "${HOME}/.gitignore_global"
 install_symlink "${repo_root}/config/git/.gitconfig" "${HOME}/.gitconfig"
 install_symlink "${repo_root}/config/editor/.editorconfig" "${HOME}/.editorconfig"
 install_symlink "${repo_root}/config/shell/.bashrc" "${HOME}/.bashrc"
@@ -48,6 +73,7 @@ install_symlink "${repo_root}/config/shell/.bash_completion" "${HOME}/.bash_comp
 install_symlink "${repo_root}/config/shell/.zshrc" "${HOME}/.zshrc"
 install_symlink "${repo_root}/config/shell/.profile" "${HOME}/.profile"
 install_symlink "${repo_root}/config/shell/.bash_profile" "${HOME}/.bash_profile"
+install_vscode_settings
 
 install_macos_terminal_settings() {
   local prefs_dir="${HOME}/Library/Preferences"

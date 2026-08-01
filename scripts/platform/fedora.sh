@@ -23,5 +23,20 @@ install_platform_packages() {
 	"${sudo_cmd[@]}" dnf makecache
 
 	log "Installing Fedora packages"
-	"${sudo_cmd[@]}" dnf install -y git curl @development-tools ripgrep fd-find micro
+	"${sudo_cmd[@]}" dnf install -y \
+		git \
+		curl \
+		@development-tools \
+		stow \
+		ripgrep \
+		fd-find \
+		micro \
+		php-cli \
+		php-curl \
+		php-mbstring \
+		php-xml \
+		composer \
+		mariadb \
+		postgresql \
+		sqlite
 }

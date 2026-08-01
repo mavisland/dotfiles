@@ -89,11 +89,31 @@ function Install-WindowsTerminalSettings {
     Copy-Item -Force $terminalSource $targetPath
 }
 
+function Install-VSCodeSettings {
+    $settingsSource = Join-Path $repoRoot 'config/vscode/settings.json'
+    $settingsPath = Join-Path $env:APPDATA 'Code\User\settings.json'
+    $settingsParent = Split-Path -Parent $settingsPath
+
+    if (-not (Test-Path $settingsParent)) {
+        New-Item -ItemType Directory -Force -Path $settingsParent | Out-Null
+    }
+
+    if (Test-Path $settingsPath) {
+        $backup = "$settingsPath.bak.$(Get-Date -Format 'yyyyMMddHHmmss')"
+        Write-Log "Backing up $settingsPath to $backup"
+        Move-Item -Force $settingsPath $backup
+    }
+
+    Write-Log "Copying $settingsSource -> $settingsPath"
+    Copy-Item -Force $settingsSource $settingsPath
+}
+
 Write-Log 'Installing core dotfiles'
 Install-File -Source (Join-Path $repoRoot 'config/git/.gitconfig') -Target (Join-Path $HOME '.gitconfig')
 Install-File -Source (Join-Path $repoRoot 'config/editor/.editorconfig') -Target (Join-Path $HOME '.editorconfig')
 Install-File -Source (Join-Path $repoRoot 'config/shell/.bashrc') -Target (Join-Path $HOME '.bashrc')
 Install-PowerShellProfile
 Install-WindowsTerminalSettings
+Install-VSCodeSettings
 
 Write-Log 'Core install complete'

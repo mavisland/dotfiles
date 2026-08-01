@@ -20,6 +20,8 @@ Cross-platform dotfiles and bootstrap scripts for Windows, macOS, Ubuntu, and Fe
 - Windows Terminal gets a tracked profile defaults file when its settings path is available.
 - macOS gets tracked Terminal and iTerm2 preference templates, plus zsh completion helpers.
 - macOS shell integration now loads Homebrew completions and zsh plugins when available.
+- Linux and macOS package installs now include `stow`, PHP tooling, Composer, and common database clients.
+- VS Code settings are installed into each platform's user profile location.
 - Bootstrap entry points now install the core Git, editor, and shell files into the home directory.
 - macOS, Ubuntu, and Fedora now have a first-pass package installation layer.
 - Windows now tries to install `winget` if it is missing, then falls back to Chocolatey for core package installation.

@@ -13,5 +13,18 @@ install_platform_packages() {
 	brew update
 
 	log "Installing macOS packages"
-	brew install git gh ripgrep fd micro zsh-autosuggestions zsh-syntax-highlighting
+	brew install \
+		git \
+		gh \
+		ripgrep \
+		fd \
+		micro \
+		stow \
+		php \
+		composer \
+		mysql-client \
+		postgresql@17 \
+		sqlite \
+		zsh-autosuggestions \
+		zsh-syntax-highlighting
 }

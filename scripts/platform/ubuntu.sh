@@ -23,5 +23,20 @@ install_platform_packages() {
 	"${sudo_cmd[@]}" apt-get update
 
 	log "Installing Ubuntu packages"
-	"${sudo_cmd[@]}" apt-get install -y git curl build-essential ripgrep fd-find micro
+	"${sudo_cmd[@]}" apt-get install -y \
+		git \
+		curl \
+		build-essential \
+		stow \
+		ripgrep \
+		fd-find \
+		micro \
+		php-cli \
+		php-curl \
+		php-mbstring \
+		php-xml \
+		composer \
+		default-mysql-client \
+		postgresql-client \
+		sqlite3
 }

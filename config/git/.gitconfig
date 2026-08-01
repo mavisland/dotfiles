@@ -2,11 +2,13 @@
 	name = Your Name
 	email = you@example.com
 
-[init]
-	defaultBranch = main
-
 [core]
 	editor = micro
+	excludesFile = ~/.gitignore_global
+	pager = less -FRX
+
+[init]
+	defaultBranch = main
 
 [pull]
 	rebase = false
@@ -21,4 +23,10 @@
 	st = status -sb
 	co = checkout
 	br = branch
+	cm = commit
+	ca = commit --amend
+	l = log --oneline --graph --decorate --all
+	last = log -1 --stat
+	diffc = diff --cached
+	undo = reset --soft HEAD~1
 	lg = log --oneline --graph --decorate --all
