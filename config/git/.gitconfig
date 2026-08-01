@@ -1,0 +1,24 @@
+[user]
+	name = Your Name
+	email = you@example.com
+
+[init]
+	defaultBranch = main
+
+[core]
+	editor = code --wait
+
+[pull]
+	rebase = false
+
+[fetch]
+	prune = true
+
+[push]
+	default = simple
+
+[alias]
+	st = status -sb
+	co = checkout
+	br = branch
+	lg = log --oneline --graph --decorate --all

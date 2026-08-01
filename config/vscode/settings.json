@@ -1,0 +1,10 @@
+{
+  "editor.formatOnSave": true,
+  "editor.rulers": [80, 120],
+  "editor.trimAutoWhitespace": true,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "git.autofetch": true,
+  "workbench.startupEditor": "none"
+}
