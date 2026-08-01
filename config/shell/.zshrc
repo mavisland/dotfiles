@@ -38,3 +38,7 @@ alias l='ls -CF'
 alias c='clear'
 
 PROMPT='%n@%m:%~$(__dotfiles_git_branch) %# '
+
+if [ -f "$HOME/.shell_local" ]; then
+  source "$HOME/.shell_local"
+fi

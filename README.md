@@ -17,6 +17,7 @@ Cross-platform dotfiles and bootstrap scripts for Windows, macOS, Ubuntu, and Fe
 - Git defaults are tracked in `config/git/.gitconfig`.
 - Editor defaults are tracked in `config/editor/.editorconfig` and `config/vscode/settings.json`.
 - Shell defaults start in `config/shell/.bashrc`.
+- Local-only shell overrides can live in `~/.shell_local` and are loaded by bash and zsh.
 - `micro` is exported as the default editor through shared shell and PowerShell profiles.
 - Shared shell and PowerShell prompts now show the current directory and Git branch.
 - Windows Terminal gets a tracked profile defaults file when its settings path is available.
