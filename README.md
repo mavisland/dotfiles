@@ -30,6 +30,7 @@ Cross-platform dotfiles and bootstrap scripts for Windows, macOS, Ubuntu, and Fe
 - macOS shell integration now loads Homebrew completions and zsh plugins when available.
 - Linux and macOS package installs now include `stow`, PHP tooling, Composer, and common database clients.
 - VS Code settings are installed into each platform's user profile location.
+- VS Code extensions are tracked in `config/vscode/extensions.txt` and installed when `code` is available during bootstrap.
 - Windows now installs Laragon, NanaZip, database clients, and Composer when winget is available; Laragon handles PHP, MySQL, Apache, and Nginx.
 - Bootstrap entry points now install the core Git, editor, and shell files into the home directory.
 - macOS, Ubuntu, and Fedora now have a first-pass package installation layer.

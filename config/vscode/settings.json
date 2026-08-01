@@ -1,21 +1,207 @@
 {
+  "blade.format.enable": true,
+  "css.completion.triggerPropertyValueCompletion": false,
+  "css.format.spaceAroundSelectorSeparator": true,
+  "css.hover.documentation": false,
+  "css.hover.references": false,
+  "diffEditor.ignoreTrimWhitespace": true,
+  "editor.accessibilitySupport": "off",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.emptySelectionClipboard": false,
+  "editor.detectIndentation": true,
+  "editor.fontFamily": "\"JetBrains Mono\", 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 13,
   "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit"
+  "editor.formatOnType": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.inlineSuggest.enabled": true,
+  "editor.lineHeight": 2.25,
+  "editor.linkedEditing": true,
+  "editor.minimap.enabled": false,
+  "editor.mouseWheelZoom": false,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.quickSuggestions": {
+    "other": "on",
+    "comments": "on",
+    "strings": "on"
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.rulers": [80, 120],
-  "editor.trimAutoWhitespace": true,
-  "files.eol": "\n",
-  "files.insertFinalNewline": true,
-  "files.trimTrailingWhitespace": true,
+  "editor.renderWhitespace": "all",
+  "editor.rulers": [120],
+  "editor.scrollbar.verticalScrollbarSize": 10,
+  "editor.scrollbar.horizontalScrollbarSize": 10,
+  "editor.scrollbar.vertical": "visible",
+  "editor.scrollbar.horizontal": "visible",
+  "editor.snippetSuggestions": "top",
+  "editor.stickyScroll.enabled": false,
+  "editor.stickyScroll.scrollWithEditor": false,
+  "editor.tabCompletion": "on",
+  "editor.tabSize": 4,
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "comment, comment.block.html",
+        "settings": {
+          "fontStyle": "italic"
+        }
+      }
+    ]
+  },
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "editor.wordWrap": "on",
+  "editor.wordWrapColumn": 8,
+  "emmet.includeLanguages": {
+    "njk": "html",
+    "nunjucks": "html",
+    "twig": "html"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "extensions.ignoreRecommendations": false,
   "files.associations": {
-    "*.blade.php": "blade",
-    "*.phpstub": "php"
+    ".htaccess": "apacheconf",
+    "*.css": "css",
+    "*.html": "html",
+    "*.hbs": "handlebars",
+    "*.twig": "twig",
+    "*.html.twig": "html",
+    ".prettierignore": "ignore",
+    ".eslintrc": "json",
+    ".stylelintrc": "json",
+    ".prettierrc": "json",
+    "*.njk": "nunjucks",
+    ".php_cs": "php",
+    "*.module": "php",
+    ".*rc": "plaintext",
+    ".nvmrc": "plaintext",
+    "*.sass": "sass",
+    "*.scss": "scss",
+    ".phpcs.xml.dist": "xml",
+    ".browserslistrc": "yaml",
+    "*.toml": "toml"
   },
-  "php.validate.executablePath": "php",
+  "files.eol": "\n",
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/CVS": true,
+    "**/desktop.ini": true,
+    "**/node_modules": true
+  },
+  "files.trimTrailingWhitespace": true,
+  "git.alwaysSignOff": true,
   "git.autofetch": true,
-  "git.confirmSync": false,
   "git.enableSmartCommit": true,
-  "workbench.startupEditor": "none"
+  "html.autoClosingTags": true,
+  "html.format.indentHandlebars": true,
+  "html.hover.documentation": false,
+  "html.hover.references": false,
+  "html.suggest.html5": true,
+  "html.validate.scripts": true,
+  "html.validate.styles": true,
+  "intelephense.maxMemory": 4096,
+  "less.hover.documentation": false,
+  "less.hover.references": false,
+  "less.validate": false,
+  "liveServer.settings.donotVerifyTags": true,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "markdown.preview.lineHeight": 1.5,
+  "php.docblock.classSnippet": {
+    "@author": "Tanju Yıldız <ben@tanjuyildiz.com>",
+    "@copyright": "(c) $CURRENT_YEAR"
+  },
+  "php.suggest.basic": false,
+  "php.validate.enable": false,
+  "rainbow_csv.csv_lint_detect_trailing_spaces": true,
+  "rainbow_csv.enable_context_menu_tail": true,
+  "search.exclude": {
+    "**/*.code-search": true,
+    "**/bower_components": true,
+    "**/node_modules": true
+  },
+  "scss.format.spaceAroundSelectorSeparator": true,
+  "scss.lint.compatibleVendorPrefixes": "error",
+  "scss.lint.emptyRules": "error",
+  "scss.lint.zeroUnits": "warning",
+  "security.workspace.trust.untrustedFiles": "open",
+  "terminal.external.osxExec": "iTerm.app",
+  "terminal.external.windowsExec": "wt.exe",
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "terminal.integrated.fontFamily": "Hack, 'Courier New', monospace",
+  "terminal.integrated.fontWeight": 700,
+  "terminal.integrated.fontSize": 12,
+  "terminal.integrated.lineHeight": 1.5,
+  "terminal.integrated.minimumContrastRatio": 7,
+  "window.commandCenter": false,
+  "window.menuBarVisibility": "compact",
+  "window.title": "${dirty}${activeEditorShort}${separator}${activeFolderMedium}${separator}${rootName}",
+  "window.titleSeparator": " | ",
+  "workbench.activityBar.location": "top",
+  "workbench.colorTheme": "One Dark Pro Night Flat",
+  "workbench.editorAssociations": {
+    "*.copilotmd": "vscode.markdown.preview.editor",
+    "*.pdf": "default"
+  },
+  "workbench.editor.enablePreview": false,
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.layoutControl.enabled": false,
+  "workbench.productIconTheme": "feather-vscode",
+  "workbench.sideBar.location": "right",
+  "workbench.startupEditor": "none",
+  "workbench.tree.enableStickyScroll": false,
+  "[blade]": {
+    "editor.defaultFormatter": "DEVSENSE.phptools-vscode",
+    "editor.tabSize": 4,
+    "editor.useTabStops": true
+  },
+  "[css][scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[handlebars]": {
+    "editor.formatOnSave": false
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.foldingStrategy": "indentation",
+    "editor.tabSize": 4,
+    "editor.useTabStops": true
+  },
+  "[javascript][json][jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[liquid]": {
+    "editor.defaultFormatter": "sissel.shopify-liquid"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
+  "[njk]": {
+    "editor.tabSize": 4,
+    "editor.useTabStops": true
+  },
+  "[php]": {
+    "editor.defaultFormatter": "DEVSENSE.phptools-vscode",
+    "editor.tabSize": 4,
+    "editor.useTabStops": true
+  },
+  "[twig]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": false,
+    "editor.formatOnType": false,
+    "editor.tabSize": 4,
+    "editor.useTabStops": true
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

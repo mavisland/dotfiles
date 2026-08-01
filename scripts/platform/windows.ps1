@@ -1,6 +1,7 @@
 param()
 
 $ErrorActionPreference = 'Stop'
+$repoRoot = Split-Path -Parent $PSScriptRoot
 
 function Test-WingetAvailable {
 	return [bool](Get-Command winget -ErrorAction SilentlyContinue)
@@ -56,6 +57,7 @@ function Install-PlatformPackages {
 		winget install --id DBeaver.DBeaver.Community --exact --accept-source-agreements --accept-package-agreements
 		Install-Composer
 		Install-NerdFont
+		Install-VSCodeExtensions
 		return
 	}
 
@@ -65,6 +67,7 @@ function Install-PlatformPackages {
 		choco install git curl gh vscode nanazip ripgrep fd micro laragon sqlite dbeaver -y
 		Install-Composer
 		Install-NerdFont
+		Install-VSCodeExtensions
 		return
 	}
 
@@ -85,7 +88,7 @@ function Install-Composer {
 	Write-Host '[dotfiles] Installing Composer via the official installer'
 	$installerPath = Join-Path $env:TEMP 'composer-setup.exe'
 	Invoke-WebRequest -Uri 'https://getcomposer.org/Composer-Setup.exe' -OutFile $installerPath
-	Start-Process -FilePath $installerPath -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART' -Wait
+	Start-Process -FilePath $installerPath -ArgumentList '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART' -Wait
 }
 
 function Install-NerdFont {
@@ -107,4 +110,27 @@ function Install-NerdFont {
 	}
 
 	Remove-Item -Recurse -Force $tempDir
+}
+
+function Install-VSCodeExtensions {
+	$extensionsFile = Join-Path $repoRoot 'config\vscode\extensions.txt'
+
+	if (-not (Test-Path $extensionsFile)) {
+		Write-Host '[dotfiles] VS Code extensions list not found; skipping extension install.'
+		return
+	}
+
+	if (-not (Get-Command code -ErrorAction SilentlyContinue)) {
+		Write-Host '[dotfiles] code CLI is not available; skipping VS Code extension install.'
+		return
+	}
+
+	Write-Host '[dotfiles] Installing VS Code extensions'
+	Get-Content $extensionsFile | ForEach-Object {
+		$extension = $_.Trim()
+		if (-not [string]::IsNullOrWhiteSpace($extension)) {
+			code --install-extension $extension --force
+		}
+	}
+	Write-Host '[dotfiles] VS Code extensions installed successfully'
 }
