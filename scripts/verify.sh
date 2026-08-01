@@ -26,7 +26,15 @@ fi
 
 if command -v composer >/dev/null 2>&1; then
   echo "[dotfiles] Validating Composer config"
-  COMPOSER_HOME="${repo_root}/config/composer/.config/composer" composer validate --no-check-publish --no-interaction
+
+  COMPOSER_TARGET="$HOME/.config/composer/composer.json"
+
+  if [ ! -f "$COMPOSER_TARGET" ]; then
+    echo "$COMPOSER_TARGET not found."
+    exit 3
+  fi
+
+  composer validate --working-dir="${repo_root}/config/composer/.config/composer" --no-check-publish --no-interaction
 fi
 
 if command -v php >/dev/null 2>&1; then
